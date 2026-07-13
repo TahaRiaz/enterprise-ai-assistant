@@ -10,6 +10,9 @@ from app.core.logger import app_logger
 from contextlib import asynccontextmanager
 
 from app.middleware.request_logger import RequestLoggingMiddleware
+
+from app.core.metadata import API_DESCRIPTION
+
 @asynccontextmanager
 async def lifespan(app:FastAPI):
     app_logger.info("Application starting....")
@@ -21,6 +24,7 @@ app = FastAPI(
     title= settings.APP_NAME,
     version=settings.APP_VERSION,
     debug=settings.DEBUG,
+    description=API_DESCRIPTION,
     lifespan=lifespan,
 )
 

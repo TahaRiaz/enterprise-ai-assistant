@@ -1,10 +1,11 @@
 from fastapi import APIRouter
 
-from app.api.v1.endpoints import heath
+from app.api.v1.endpoints import health
+from app.core.constants import APITags
 
 router = APIRouter()
 
 router.include_router(
-    heath.router,
-    tags=["Health"],
+    health.router,
+    tags=[APITags.HEALTH],
 )
