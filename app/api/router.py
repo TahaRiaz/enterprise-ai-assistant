@@ -4,7 +4,8 @@ from app.config.settings import settings
 
 api_router = APIRouter()
 
+
 api_router.include_router(
     v1_router,
-    prefix=settings.API_V1_PREFIX,
+    prefix=settings.ENTPRISE_API_V1_PREFIX,
 )

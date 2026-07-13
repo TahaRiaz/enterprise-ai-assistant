@@ -4,7 +4,7 @@ class Settings(BaseSettings):
     APP_NAME: str
     APP_VERSION:str
     DEBUG: bool
-    API_V1_PREFIX: str
+    ENTPRISE_API_V1_PREFIX: str
 
 
     model_config = SettingsConfigDict(
