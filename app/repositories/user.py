@@ -24,3 +24,13 @@ class UserRepository(BaseRepository):
 
         return self.db.scalar(statement=statement)
     
+    def get_by_email_or_username(
+            self,
+            email:str,
+            username: str,
+    ):
+        statment = select(User).where(
+            (User.email == email)
+             | (User.username == username)
+        )
+        return self.db.scalar(statement=statment)

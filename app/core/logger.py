@@ -15,7 +15,7 @@ logger.remove()
 #console logging
 logger.add(
     sys.stdout,
-    level="Info",
+    level="INFO",
     colorize=True,
 )
 

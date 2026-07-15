@@ -13,6 +13,7 @@ class BaseRepository(Generic[ModelType]):
         self.db.add(obj)
         self.db.commit()
         self.db.refresh(obj)
+        return obj
 
     def get(self, id: int):
         return self.db.get(

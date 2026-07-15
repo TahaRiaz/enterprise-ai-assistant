@@ -1,0 +1,11 @@
+2026-07-16 00:13:46.481 | INFO     | app.main:lifespan:18 - Application starting....
+2026-07-16 00:13:52.631 | INFO     | app.middleware.request_logger:dispatch:13 - GET / 404 0.003s
+2026-07-16 00:14:03.751 | INFO     | app.middleware.request_logger:dispatch:13 - GET /api/v1/health 307 0.001s
+2026-07-16 00:14:03.972 | INFO     | app.services.health_service:get_health:8 - Health check requested.
+2026-07-16 00:14:03.987 | INFO     | app.middleware.request_logger:dispatch:13 - GET /api/v1/health/ 200 0.094s
+2026-07-16 00:14:04.424 | INFO     | app.middleware.request_logger:dispatch:13 - GET /favicon.ico 404 0.000s
+2026-07-16 00:14:29.814 | INFO     | app.middleware.request_logger:dispatch:13 - GET /docs 200 0.000s
+2026-07-16 00:14:31.154 | INFO     | app.middleware.request_logger:dispatch:13 - GET /openapi.json 200 0.030s
+2026-07-16 00:15:07.650 | INFO     | app.middleware.request_logger:dispatch:13 - POST /api/v1/auth/regiter 422 0.025s
+2026-07-16 00:15:14.565 | INFO     | app.middleware.request_logger:dispatch:13 - POST /api/v1/auth/regiter 422 0.005s
+2026-07-16 00:16:19.115 | INFO     | app.main:lifespan:20 - Application shutting down....
