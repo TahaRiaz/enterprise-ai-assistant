@@ -3,7 +3,9 @@ from fastapi import APIRouter, Depends, status
 from app.dependencies.services import get_auth_service
 from app.schemas.auth import (
     RegisterRequest,
-    UserResponse
+    UserResponse,
+    TokenResponse,
+    LoginRequest
 )
 from app.schemas.common import ApiResponse
 from app.services.auth_service import AuthService
@@ -28,5 +30,16 @@ async def register(
         data=UserResponse.model_validate(user),
     )
 
+@router.post("/login", response_model=ApiResponse[TokenResponse])
+async def login(
+    request: LoginRequest,
+    service: AuthService = Depends(get_auth_service),
+):
+    token = service.login(request=request)
 
+    return ApiResponse(
+        success=True,
+        message="Login successful.",
+        data=token,
+    )
 

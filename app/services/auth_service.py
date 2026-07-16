@@ -2,7 +2,12 @@ from app.core.exceptions import AppException
 from app.core.security import hash_password
 from app.database.models.user import User
 from app.repositories.user import UserRepository
-from app.schemas.auth import RegisterRequest
+from app.schemas.auth import RegisterRequest,LoginRequest,TokenResponse
+from app.core.security import (
+    create_access_token,
+    verify_password,
+)
+
 
 class AuthService:
 
@@ -37,3 +42,34 @@ class AuthService:
         )
 
         return self.user_repository.create(user)
+    
+
+    def login(
+            self,
+            request: LoginRequest,
+    ):
+        user = self.user_repository.get_by_email(
+            request.email,
+        )
+
+        if not user:
+            raise AppException(
+                "Invalid email or password"
+            )
+
+        if not verify_password(
+            request.password,
+            user.hash_password,
+        ):
+            raise AppException(
+                "Invalid email or password"
+            )
+        
+        token = create_access_token(
+            user_id=user.id,
+            email=user.email,
+        )
+
+        return TokenResponse(
+            access_token=token,
+        )
