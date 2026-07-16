@@ -8,7 +8,7 @@ from app.repositories.base import BaseRepository
 class UserRepository(BaseRepository):
 
     def __init__(self, db:Session,):
-        super().__init__(User,db)
+        super().__init__(db,User)
     
     def get_by_email(self,email:str):
         statement = select(User).where(
