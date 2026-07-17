@@ -3,7 +3,7 @@ from datetime import datetime
 from sqlalchemy import Boolean
 from sqlalchemy import DateTime
 from sqlalchemy import String
-from sqlalchemy.orm import (Mapped, mapped_column)
+from sqlalchemy.orm import (Mapped, mapped_column,relationship)
 from app.database.mixins import (
     IDMixin,
     TimestampMixin
@@ -38,4 +38,12 @@ class User(Base,IDMixin,TimestampMixin):
         Boolean,
         default=False,
     )
+
+    conversation = relationship(
+        "Conversation",
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )
+
+    
 
