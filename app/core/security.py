@@ -2,6 +2,8 @@ from pwdlib import PasswordHash
 from datetime import datetime,timedelta,timezone
 from app.config.settings import settings
 import jwt
+from jwt import ExpiredSignatureError, InvalidTokenError
+from app.core.exceptions import AppException
 
 passwordHash = PasswordHash.recommended()
 
@@ -30,9 +32,22 @@ def create_access_token(user_id:int, email:str) ->str:
         algorithm=settings.JWT_ALGORITHM,
     )
 
-def verify_access_token(token:str):
-    return jwt.decode(
-        token,
-        settings.JWT_SECRET_KEY,
-        algorithms=[settings.JWT_ALGORITHM],
-    )
+def decode_access_token(token:str) -> dict:
+
+    try:
+
+        return jwt.decode(
+            token,
+            settings.JWT_SECRET_KEY,
+            algorithms=[settings.JWT_ALGORITHM],
+        )
+    
+    except ExpiredSignatureError:
+        raise AppException(
+            "Access token has expired."
+        )
+    
+    except InvalidTokenError:
+        raise AppException(
+            "Invalid access token."
+        )

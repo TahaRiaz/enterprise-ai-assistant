@@ -3,18 +3,16 @@ from datetime import datetime
 from sqlalchemy import Boolean
 from sqlalchemy import DateTime
 from sqlalchemy import String
-from sqlalchemy.orm import Mapped
-from sqlalchemy.orm import mapped_column
-
+from sqlalchemy.orm import (Mapped, mapped_column)
+from app.database.mixins import (
+    IDMixin,
+    TimestampMixin
+)
 from app.database.base import Base
 
-class User(Base):
+class User(Base,IDMixin,TimestampMixin):
     __tablename__ = "users"
     
-    id: Mapped[int] = mapped_column(
-        primary_key=True,
-        index=True,
-    )
     email: Mapped[str] = mapped_column(
         String(255),
         unique=True,
@@ -41,13 +39,3 @@ class User(Base):
         default=False,
     )
 
-    created_at: Mapped[datetime] = mapped_column(
-        DateTime,
-        default=datetime.utcnow,
-    )
-
-    updated_at: Mapped[datetime] = mapped_column(
-        DateTime,
-        default=datetime.utcnow,
-        onupdate=datetime.utcnow,
-    )
