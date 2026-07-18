@@ -45,5 +45,11 @@ class User(Base,IDMixin,TimestampMixin):
         cascade="all, delete-orphan",
     )
 
+    documents = relationship(
+        "Documents",
+        back_populates="user",
+        cascade="all, delete-orphan"
+    )
+
     
 

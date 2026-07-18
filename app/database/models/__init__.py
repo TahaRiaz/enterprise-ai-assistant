@@ -1,3 +1,3 @@
 from app.database.models.user import User
 
-_all__ = ["User","Conversation","Message"]
+_all__ = ["User","Conversation","Message","Document"]
