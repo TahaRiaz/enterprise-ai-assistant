@@ -1,6 +1,7 @@
 from fastapi import APIRouter
 from fastapi import Depends
 from app.schemas.auth import UserResponse
+from app.core.constants import APITags
 
 from app.dependencies.auth import (
     get_current_user,
@@ -11,7 +12,7 @@ from app.database.models.user import User
 
 router = APIRouter(
     prefix="/users",
-    tags=["Users"]
+    tags=APITags.AUTH
 )
 
 @router.get("/me")

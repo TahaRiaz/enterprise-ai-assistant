@@ -46,7 +46,7 @@ class User(Base,IDMixin,TimestampMixin):
     )
 
     documents = relationship(
-        "Documents",
+        "Document",
         back_populates="user",
         cascade="all, delete-orphan"
     )

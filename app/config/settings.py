@@ -9,6 +9,10 @@ class Settings(BaseSettings):
     JWT_SECRET_KEY:str
     JWT_ALGORITHM:str
     ACCESS_TOKEN_EXPIRE_MINUTES:int
+    MAX_FILE_SIZE:int
+    ALLOWED_DOCUMENT_EXTENSIONS: dict
+    ALLOWED_TYPES:dict
+
 
 
     model_config = SettingsConfigDict(

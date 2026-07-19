@@ -12,7 +12,7 @@ from app.database.mixins import (
 from app.database.enums import DocumentStatus
 
 
-class Documents(Base,TimestampMixin,IDMixin):
+class Document(Base,TimestampMixin,IDMixin):
     __tablename__ = "documents"
 
 
