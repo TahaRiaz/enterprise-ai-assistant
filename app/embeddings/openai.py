@@ -15,7 +15,8 @@ class OpenAIEmbeddingProvider(EmbeddingProvider):
     async def embed(
             self,
             texts: list[str],
-    ) -> list[list[float]]:
+    ) -> list[list[float]]: ## Vectors are list of float values here we are returning a
+        ## a vectors for each chunk of text provided in the input
         
         response = await self.client.embeddings.create(
             model=settings.EMBEDDING_MODEL,

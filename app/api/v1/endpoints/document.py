@@ -28,7 +28,7 @@ async def upload(
         current_user=current_user
     )
 
-    background_tasks.add_task(processor.process_document, document_id=document.id)
+    background_tasks.add_task(processor.process_document, document=document)
 
     return ApiResponse(
         success=True,

@@ -4,10 +4,7 @@ from pathlib import Path
 from fastapi import Depends,UploadFile
 from app.database.enums import DocumentStatus
 from app.database.models.document import Document
-from app.repositories.document import DocumentRepository
-from app.dependencies.repositories import (get_document_repository)
 from app.services.base_service import BaseService
-from app.database.models.user import User
 from app.core.exceptions import AppException
 from app.config.settings import Settings
 
