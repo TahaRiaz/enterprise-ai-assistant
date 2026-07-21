@@ -12,6 +12,8 @@ class Settings(BaseSettings):
     MAX_FILE_SIZE:int
     ALLOWED_DOCUMENT_EXTENSIONS: dict
     ALLOWED_TYPES:dict
+    OPENAI_API_KEY:str
+    EMBEDDING_MODEL:str
 
 
 
