@@ -14,6 +14,8 @@ class Settings(BaseSettings):
     ALLOWED_TYPES:dict
     OPENAI_API_KEY:str
     EMBEDDING_MODEL:str
+    QDRANT_URL:str
+    QDRANT_COLLECTION:str
 
 
 
