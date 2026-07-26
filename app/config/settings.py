@@ -16,6 +16,7 @@ class Settings(BaseSettings):
     EMBEDDING_MODEL:str
     QDRANT_URL:str
     QDRANT_COLLECTION:str
+    OPENAI_MODEL:str
 
 
 
