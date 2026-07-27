@@ -1,4 +1,5 @@
 from fastapi import APIRouter, Depends, status
+from app.core.constants import APITags
 
 from app.dependencies.services import get_auth_service
 from app.schemas.auth import (
@@ -12,7 +13,7 @@ from app.services.auth_service import AuthService
 
 router = APIRouter(
     prefix="/auth",
-    tags=["Authentication"]
+    tags=APITags.AUTH
 )
 
 @router.post("/regiter", status_code=status.HTTP_201_CREATED,response_model=ApiResponse[UserResponse],)

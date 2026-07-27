@@ -1,4 +1,5 @@
 from abc import ABC,abstractmethod
+from collections.abc import AsyncIterator
 
 class ChatModel(ABC):
 
@@ -8,4 +9,12 @@ class ChatModel(ABC):
         prompt:str,
     ) -> str:
         ...
+
+
+    @abstractmethod
+    async def stream(
+        self,
+        prompt:str,
+    ) -> AsyncIterator[str]:
+        ...    
 

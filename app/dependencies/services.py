@@ -6,6 +6,7 @@ from app.services.document_service import DocumentService
 from app.repositories.document import DocumentRepository
 from app.dependencies.repositories import get_document_repository
 from app.workers.document_processor import DocumentProcessor
+from app.rag.pipeline import RAGPipeline
 from fastapi import Depends
 
 def get_health_services() -> HealthService:
@@ -20,3 +21,6 @@ def get_document_service(repository: DocumentRepository = Depends(get_document_r
 
 def get_document_processor_service() -> DocumentProcessor:
     return DocumentProcessor()
+
+def get_rag_pipeline() ->RAGPipeline:
+    return RAGPipeline()
