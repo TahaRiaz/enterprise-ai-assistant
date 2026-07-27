@@ -17,6 +17,7 @@ class RAGPipeline:
     async def ask(
             self,
             question:str,
+            history: list[ChatMessage]
     ):
 
         chunks = self.retriever.retrieve(
@@ -40,7 +41,7 @@ class RAGPipeline:
         return answer
 
 
-    async def strea(
+    async def stream(
             self,
             question:str,
     ):

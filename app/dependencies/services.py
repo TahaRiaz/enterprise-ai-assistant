@@ -4,8 +4,11 @@ from app.repositories.user import UserRepository
 from app.services.auth_service import AuthService
 from app.services.document_service import DocumentService
 from app.repositories.document import DocumentRepository
-from app.dependencies.repositories import get_document_repository
+from app.repositories.message import MessageRepository
+from app.repositories.conversation import ConversationRepository
+from app.dependencies.repositories import get_document_repository, get_conversation_repository, get_message_repository
 from app.workers.document_processor import DocumentProcessor
+from app.services.chat_service import ChatService
 from app.rag.pipeline import RAGPipeline
 from fastapi import Depends
 
@@ -24,3 +27,12 @@ def get_document_processor_service() -> DocumentProcessor:
 
 def get_rag_pipeline() ->RAGPipeline:
     return RAGPipeline()
+
+def get_chat_services(conversation_repository: ConversationRepository = Depends(get_conversation_repository),
+                      message_repository:MessageRepository = Depends(get_message_repository),
+                      pipeline: RAGPipeline = Depends(get_rag_pipeline)) -> ChatService:
+    return ChatService(
+        conversation_repository,
+        message_repository,
+        pipeline,
+    )

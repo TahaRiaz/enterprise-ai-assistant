@@ -10,6 +10,8 @@ class ChatResponse(BaseModel):
 
 class ChatRequest(BaseModel):
     question: str
+    conversation_id: int | None = None
+    user_id: int
 
 
     model_config = ConfigDict(from_attributes=True)
