@@ -15,3 +15,10 @@ class ChatRequest(BaseModel):
 
 
     model_config = ConfigDict(from_attributes=True)
+
+
+class ChatMessage(BaseModel):
+    role:str
+    content:str
+
+    model_config = ConfigDict(from_attributes=True)

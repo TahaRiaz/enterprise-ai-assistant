@@ -48,3 +48,9 @@ class Document(Base,TimestampMixin,IDMixin):
         "User",
         back_populates="documents"
     )
+
+    chunks = relationship(
+        "chunk",
+        back_populates="document",
+        cascade="all,delete-orphan"
+    )

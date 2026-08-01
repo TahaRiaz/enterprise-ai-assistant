@@ -1,4 +1,4 @@
-
+from app.schemas.chat import ChatMessage
 
 class PromptBuilder:
 
@@ -10,8 +10,12 @@ Answer ONLY using the provided context"""
     def build(
             self,
             question: str,
+            history,
             chunks,
+          
     ) -> str:
+
+        history_text = self._format_history(history=history)
 
         context = "\n\n".join(
             f"[Page ${c.page_number}]\n${c.text}"
@@ -21,13 +25,31 @@ Answer ONLY using the provided context"""
         return f"""
 {self.SYSTEM_PROMPT}
 
-Context:
 
+History:
+{history_text}
+
+Context:
 {context}
 
 Question:
-
 {question}
 
 Answer:
 """
+
+    def _format_history(
+            self,
+            history: list[ChatMessage],
+    ) -> str:
+        if not history:
+            return ""
+
+        lines = []
+
+        for message in history:
+            lines.append(
+                f"{message.role.title()}: {message.content}"
+            )
+
+        return "\n".join(lines)

@@ -1,4 +1,4 @@
-from app.database.models.document import Document
+from app.database.models.documents import Document
 from app.parsers.factory import ParserFactory
 from app.chunkers.recursive import RecursiveChunker
 from app.embeddings.factory import EmbeddingProviderFactory
@@ -6,8 +6,8 @@ from app.embeddings.factory import EmbeddingProviderFactory
 
 class DocumentProcessor:
 
-    def __init__(self, document):
-        self.document = document
+    def __init__(self, chunk_service,):
+        self.chunk_service = chunk_service
 
     async def process_document(self, document:Document):
         
@@ -23,6 +23,11 @@ class DocumentProcessor:
 
         chunker = RecursiveChunker()
         chunks = chunker.chunk(document=parsed_document)
+
+        self.chunk_service.save_chunks(
+            chunks=chunks,
+            document_id=document.id
+        )
 
         ## Step 3: Genrate vector embeddings for each chunk
         embedding_provider = EmbeddingProviderFactory.create()

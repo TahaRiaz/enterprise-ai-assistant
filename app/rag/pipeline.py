@@ -1,4 +1,5 @@
 from app.core.exceptions import AppException
+from app.schemas.chat import ChatMessage
 
 class RAGPipeline:
 
@@ -44,6 +45,7 @@ class RAGPipeline:
     async def stream(
             self,
             question:str,
+            history: list[ChatMessage]
     ):
 
         chunks = self.retriever.retrieve(

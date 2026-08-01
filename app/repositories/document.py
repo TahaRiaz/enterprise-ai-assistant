@@ -1,4 +1,4 @@
-from app.database.models.document import Document
+from app.database.models.documents import Document
 from app.repositories.base import BaseRepository
 from sqlalchemy.orm import Session
 from sqlalchemy import select

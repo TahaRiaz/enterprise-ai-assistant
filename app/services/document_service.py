@@ -3,7 +3,7 @@ from pathlib import Path
 
 from fastapi import Depends,UploadFile
 from app.database.enums import DocumentStatus
-from app.database.models.document import Document
+from app.database.models.documents import Document
 from app.services.base_service import BaseService
 from app.core.exceptions import AppException
 from app.config.settings import Settings

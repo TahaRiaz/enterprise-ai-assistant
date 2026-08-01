@@ -1,6 +1,6 @@
 from app.core.exceptions import AppException
 from app.database.models.message import Message
-from app.schemas.chat import ChatRequest
+from app.schemas.chat import ChatRequest,ChatMessage
 
 class ChatService:
 
@@ -48,8 +48,28 @@ class ChatService:
             message
         )
 
-        history = await self.message_repo.get_recent_messages(
+        messages = await self.message_repo.get_recent_messages(
             conversation.id,
         )
 
-        answer = await self.pipeline.stream()
+        history = [
+            ChatMessage(
+                role=message.role,
+                content = message.content,
+            )
+            for message in messages
+        ]
+
+        answer = await self.pipeline.stream(
+            question,
+            history
+        )
+
+        await self.message_repo.add_message(
+            Message(
+                role="assistant",
+                converastion_id=converastion_id,
+                content=answer,
+            )
+        )
+        return answer
