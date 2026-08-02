@@ -2,6 +2,7 @@ from app.database.models.documents import Document
 from app.parsers.factory import ParserFactory
 from app.chunkers.recursive import RecursiveChunker
 from app.embeddings.factory import EmbeddingProviderFactory
+from app.vectordb.factory import VectorStoreFactory
 
 
 class DocumentProcessor:
@@ -36,6 +37,9 @@ class DocumentProcessor:
                 chunk.text for chunk in chunks
             ]
         )
+
+        vector_store = VectorStoreFactory.get_vector_store()
+        vector_store.create_collection(collection_name=document.collection_name)
 
 
 
